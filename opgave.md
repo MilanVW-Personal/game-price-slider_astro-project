@@ -56,8 +56,8 @@ Gebruik de documentatie van Flowbite om de frontend te bouwen.
 Enkele bijkomende vereisten:
 - Werk met components binnen Astro. Volgende componenten moeten gedefinieerd zijn:
 - `GameList` - Lijst van alle games
-- `SearchInput` - Input veld om te filteren op naam
-- `DiscountRangeSlider` - Slider om te filteren op kortingspercentage
+- `SearchInput` - Input veld om te filteren op naam. Gebruik hiervoor een id "simple-search".
+- `DiscountRangeSlider` - Slider om te filteren op kortingspercentage. Gebruik hiervoor een id "discount-slider".
 
 ### Testen toevoegen
 
@@ -65,9 +65,13 @@ Voeg testen toe aan je frontend. Gebruik hiervoor [Playwright](https://docs.astr
 
 Schrijf testen voor volgende zaken:
 - De frontend bevat een lijst van games
+  - Deze test mag slagen vanaf dat er 2 games in de lijst staan
 - De frontend bevat een input veld om te filteren op naam
+  - Deze test mag slagen vanaf dat er een input element met id 'simple-search' aanwezig is.
 - De frontend toont de juiste games na het filteren via de slider
+  - Deze test mag slagen wanneer je filtert op "Forza" en er x games in de lijst staan. Dit is afhankelijk van je JSON die je gebruikt.
 - De frontend toont de juiste games na het filteren via de zoekfunctie en de slider tegelijk
+  - Deze test mag slagen wanneer je filtert op "Forza" en kortingspercentage gelijk aan of hoger dan 75. Er moeten x games in de lijst staan. Dit is afhankelijk van je JSON die je gebruikt.
 
 ### Testen runnen in CI/CD
 
@@ -82,9 +86,9 @@ defaults:
     working-directory: frontend
 on:
   push:
-    branches: [ main ]
+    branches: [ main, master ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, master ]
 jobs:
   build-and-test:
     timeout-minutes: 60
