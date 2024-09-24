@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import GameList from '../data/steam-deals.json'
+---
+
+<Layout title='Welcome to Astro.'/>
+
+<main>
+	<!-- Thuis slider implementens -->
+	<input type="range" min="0" max="100" value="50">
+	<!--Deze onderstaande map functie is om de games in een lijst te tonen op de pagina via de component 'Card'. Dit staat in de <main> element, maar wel buiten de <Label> tag. Deze laatste moet een short-closed tag worden '</>', omdat, alles wat er dan zou instaan, niet zou tonen op het scherm.-->
+	{GameList.map(g => {
+		if (g.discountPercentage == null)
+			g.isDiscounted = false
+		else 
+			g.isDiscounted = true
+
+		return (	
+			<Card href='https://store.steampowered.com/search?filter=topsellers' 
+				  title={g.title} 
+				  body={g.isDiscounted ? `Deze game heeft een discount van ${g.discountPercentage}%` : "Er is geen discount voor deze game op het moment"}/>		
+		)
+	})}
+</main>
+	
