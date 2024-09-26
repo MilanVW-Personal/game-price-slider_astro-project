@@ -1,26 +1,30 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
-import GameList from '../data/steam-deals.json'
+import GameList from '../components/GameList.astro'
+import DiscountRangeSlider from '../components/DiscountRangeSlider.astro';
 ---
 
 <Layout title='Welcome to Astro.'/>
-
 <main>
-	<!-- Thuis slider implementens -->
-	<input type="range" min="0" max="100" value="50">
-	<!--Deze onderstaande map functie is om de games in een lijst te tonen op de pagina via de component 'Card'. Dit staat in de <main> element, maar wel buiten de <Label> tag. Deze laatste moet een short-closed tag worden '</>', omdat, alles wat er dan zou instaan, niet zou tonen op het scherm.-->
-	{GameList.map(g => {
-		if (g.discountPercentage == null)
-			g.isDiscounted = false
-		else 
-			g.isDiscounted = true
-
-		return (	
-			<Card href='https://store.steampowered.com/search?filter=topsellers' 
-				  title={g.title} 
-				  body={g.isDiscounted ? `Deze game heeft een discount van ${g.discountPercentage}%` : "Er is geen discount voor deze game op het moment"}/>		
-		)
-	})}
+	<DiscountRangeSlider min={0} max={100} value={50}/>
+	<GameList/>
 </main>
+
+<script>
+	let slider = document.querySelector("#discount-slider") as HTMLInputElement // Ophalen van de slider zelf
+	let sliderTekst = document.querySelector("#sliderValue") as HTMLParagraphElement
+	let sliderValue = 0; // Value van de slider initialiseren
+
+	function changeValue(event: Event) // Functie om value te veranderen aanmaken
+	{
+		let inputValue = event.target as  HTMLInputElement
+		sliderValue = parseInt(inputValue.value) // sliderValue instellen op het inputValue
+		console.log(sliderValue)
+		
+		sliderTekst.textContent = "Current value: " + sliderValue.toString() + "%" // <p> element opvullen met de value van de slider.
+	}
+	
+	slider?.addEventListener("input", changeValue) // event toevoegen aan de slider, die elke 'slide' bijhoudt.
+</script>
 	

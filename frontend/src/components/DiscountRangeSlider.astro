@@ -1,0 +1,20 @@
+---
+interface Props {
+    min: number,
+    max: number,
+    value: number;
+}
+
+const { min, max, value } = Astro.props
+---
+
+<div class="relative mb-12 w-1/2">
+    <input id="discount-slider" type="range" min={min} max={max} value={value} class="w-full h-2 mb-6 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+    
+    <div class="flex justify-between">
+        <span class="text-sm text-blue-500 dark:text-blue-400 absolute start-5 -bottom-1">{min}%</span>
+        <span class="text-sm text-blue-500 dark:text-blue-400 absolute end-5 -bottom-1">{max}%</span>
+    </div>
+    
+    <b><span  class="text-sm text-black-400 dark:text-black-400  absolute left-1/2 transform -translate-x-1/2 -bottom-8 text-center" id="sliderValue">Current value: {value}%</span></b>
+ </div>
