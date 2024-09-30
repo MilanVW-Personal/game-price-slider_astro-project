@@ -1,23 +1,41 @@
 ---
 import json from '../data/steam-deals.json'
+
+interface Props {
+    value: number;
+}
+
+const {value} = Astro.props
+
+const filtered = value > 0 
+    ? json.filter(g => g.isDiscounted && (g.discountPercentage != null && g.discountPercentage <= value)) 
+    : json;
 ---
 
 <ul class="w-full mt-8 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
     <!--Deze onderstaande map functie is om de games in een lijst te tonen op de pagina via de component 'Card'. Dit staat in de <main> element, maar wel buiten de <Label> tag. Deze laatste moet een short-closed tag worden '</>', omdat, alles wat er dan zou instaan, niet zou tonen op het scherm.-->
-    {json.map(g => {
-        if (g.discountPercentage == null)
-            g.isDiscounted = false
-        else 
-            g.isDiscounted = true
+    {   // Hier voortdoen volgende keer (thuis / in de les)
+        // Standaard alle games tonen
+    
+        filtered.map(g => {
+            if (g.discountPercentage == null)
+                g.isDiscounted = false
+            else if (g.discountPercentage == 0)
+                g.isDiscounted = false
+            else 
+                g.isDiscounted = true
+           
+            
+            return (	
+                <li class="w-full h-19 px-4 py-2 border-b border-gray-200 dark:border-gray-600">
+                    <b>{g.title}</b>
+                    <p>{g.isDiscounted ? `Deze game heeft een discount van ${g.discountPercentage}%!` : "Er is geen discount voor deze game op het moment!"}</p>
+                </li>
+            )
+        })
+    }
+  
 
-        return (	
-            <li class="w-full h-19 px-4 py-2 border-b border-gray-200 dark:border-gray-600">
-                <b>{g.title}</b>
-                <p>{g.isDiscounted ? `Deze game heeft een discount van ${g.discountPercentage}%!` : "Er is geen discount voor deze game op het moment!"}</p>
-            </li>
-        )
-    })}
 </ul>
-
 
 

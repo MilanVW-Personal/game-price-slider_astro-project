@@ -3,18 +3,25 @@ import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 import GameList from '../components/GameList.astro'
 import DiscountRangeSlider from '../components/DiscountRangeSlider.astro';
----
+import SearchInput from '../components/SearchInput.astro';
+import json from '../data/steam-deals.json'
 
+
+---
 <Layout title='Welcome to Astro.'/>
+
 <main>
 	<DiscountRangeSlider min={0} max={100} value={50}/>
-	<GameList/>
+	<SearchInput value='Enter game'/>
+	<GameList value={0}/> <!--value:{0} kan hier ook om de value aan te passen -->
+
 </main>
 
+
 <script>
-	let slider = document.querySelector("#discount-slider") as HTMLInputElement // Ophalen van de slider zelf
-	let sliderTekst = document.querySelector("#sliderValue") as HTMLParagraphElement
-	let sliderValue = 0; // Value van de slider initialiseren
+		let slider = document.querySelector("#discount-slider") as HTMLInputElement // Ophalen van de slider zelf
+		let sliderTekst = document.querySelector("#sliderValue") as HTMLParagraphElement
+		let sliderValue = 0; // Value van de slider initialiseren
 
 	function changeValue(event: Event) // Functie om value te veranderen aanmaken
 	{
@@ -22,9 +29,9 @@ import DiscountRangeSlider from '../components/DiscountRangeSlider.astro';
 		sliderValue = parseInt(inputValue.value) // sliderValue instellen op het inputValue
 		console.log(sliderValue)
 		
-		sliderTekst.textContent = "Current value: " + sliderValue.toString() + "%" // <p> element opvullen met de value van de slider.
+		sliderTekst.textContent = "Current value: " + sliderValue + "%" // <p> element opvullen met de value van de slider.		
 	}
-	
+
 	slider?.addEventListener("input", changeValue) // event toevoegen aan de slider, die elke 'slide' bijhoudt.
 </script>
 	
