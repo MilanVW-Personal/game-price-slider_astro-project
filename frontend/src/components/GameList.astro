@@ -2,14 +2,11 @@
 import json from '../data/steam-deals.json'
 
 interface Props {
-    value: number;
+    games: typeof json
 }
 
-const {value} = Astro.props
+const {games} = Astro.props
 
-const filtered = value > 0 
-    ? json.filter(g => g.isDiscounted && (g.discountPercentage != null && g.discountPercentage <= value)) 
-    : json;
 ---
 
 <ul class="w-full mt-8 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
@@ -17,7 +14,7 @@ const filtered = value > 0
     {   // Hier voortdoen volgende keer (thuis / in de les)
         // Standaard alle games tonen
     
-        filtered.map(g => {
+        games.map(g => {
             if (g.discountPercentage == null)
                 g.isDiscounted = false
             else if (g.discountPercentage == 0)

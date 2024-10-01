@@ -1,37 +1,41 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
-import GameList from '../components/GameList.astro'
 import DiscountRangeSlider from '../components/DiscountRangeSlider.astro';
 import SearchInput from '../components/SearchInput.astro';
+import GameList from '../components/GameList.astro';
 import json from '../data/steam-deals.json'
-
 
 ---
 <Layout title='Welcome to Astro.'/>
 
 <main>
-	<DiscountRangeSlider min={0} max={100} value={50}/>
-	<SearchInput value='Enter game'/>
-	<GameList value={0}/> <!--value:{0} kan hier ook om de value aan te passen -->
-
+	<DiscountRangeSlider min={0} max={100}/>
+	<SearchInput/>
+	<GameList games={json}/>
 </main>
 
+<script type="module">
 
-<script>
-		let slider = document.querySelector("#discount-slider") as HTMLInputElement // Ophalen van de slider zelf
-		let sliderTekst = document.querySelector("#sliderValue") as HTMLParagraphElement
-		let sliderValue = 0; // Value van de slider initialiseren
 
-	function changeValue(event: Event) // Functie om value te veranderen aanmaken
-	{
-		let inputValue = event.target as  HTMLInputElement
-		sliderValue = parseInt(inputValue.value) // sliderValue instellen op het inputValue
-		console.log(sliderValue)
-		
-		sliderTekst.textContent = "Current value: " + sliderValue + "%" // <p> element opvullen met de value van de slider.		
-	}
+	let main = document.querySelector("#mainDiv") 
 
-	slider?.addEventListener("input", changeValue) // event toevoegen aan de slider, die elke 'slide' bijhoudt.
-</script>
+	let slider = document.querySelector("#discount-slider") // Ophalen van de slider zelf
+	let sliderTekst = document.querySelector("#sliderValue") 
 	
+	let searchButton = document.querySelector("#searchButton") 
+	let searchInput = document.querySelector("#simple-search") 
+
+	slider?.addEventListener("input", (event) => {
+		let inputValue = event.target
+		let sliderValue = 0; // Value van de slider initialiseren
+		sliderValue = parseInt(inputValue.value) // sliderValue instellen op het inputValue
+		// console.log(sliderValue)
+		
+		sliderTekst.textContent = "Current value: " + sliderValue + "%" // <p> element opvullen met de value van de slider.	
+		
+		const filtered = games.filter(g => g.discountPercentage != null && g.discountPercentage >= sliderValue)
+	
+		console.log(filtered)
+	}) // event toevoegen aan de slider, die elke 'slide' bijhoudt.
+</script>
