@@ -10,21 +10,23 @@ import json from '../data/steam-deals.json'
 <Layout title='Welcome to Astro.'/>
 
 <main>
-	<DiscountRangeSlider min={0} max={100}/>
-	<SearchInput/>
+	<div class="flex justify-between space-x-2">
+		<DiscountRangeSlider min={0} max={100}/>
+		<SearchInput/>
+	</div>
+
 	<GameList games={json}/>
+
 </main>
 
 <script type="module">
-
-
-	let main = document.querySelector("#mainDiv") 
-
 	let slider = document.querySelector("#discount-slider") // Ophalen van de slider zelf
 	let sliderTekst = document.querySelector("#sliderValue") 
 	
 	let searchButton = document.querySelector("#searchButton") 
 	let searchInput = document.querySelector("#simple-search") 
+
+	
 
 	slider?.addEventListener("input", (event) => {
 		let inputValue = event.target
@@ -38,4 +40,12 @@ import json from '../data/steam-deals.json'
 	
 		console.log(filtered)
 	}) // event toevoegen aan de slider, die elke 'slide' bijhoudt.
+
+	searchInput.addEventListener("input", () => {
+		console.log(searchInput.value)
+	})
+
+	searchButton.addEventListener("click", () => {
+		console.log(searchInput.value)
+	})
 </script>
