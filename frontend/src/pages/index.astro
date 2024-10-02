@@ -8,8 +8,8 @@ import json from '../data/steam-deals.json'
 ---
 <Layout title='Welcome to Astro.'/>
 
-<main id="mainDiv">
-	<div class="flex justify-between space-x-2">
+<main>
+	<div class="flex justify-between space-x-2 text-center">
 		<DiscountRangeSlider min={0} max={100}/>
 		<SearchInput/>
 	</div>
@@ -27,9 +27,9 @@ import json from '../data/steam-deals.json'
     // Filter voor slider
 	function sliderValueFilter(event: any) {
 		let inputValue = event.target
-		let tekstSlider = document.querySelector("#sliderValue")?.textContent 
+		let tekstSlider = document.querySelector("#sliderValue") as HTMLSpanElement
         sliderValue = parseInt(inputValue.value) // sliderValue instellen op het inputValue
-        tekstSlider = "Current value: " + sliderValue + "%" // <p> element opvullen met de value van de slider.	
+        tekstSlider.textContent = "Current value: " + sliderValue + "%" // <p> element opvullen met de value van de slider.	
         
 		items.forEach(i => {
 			let discountText = i?.querySelector("p")?.textContent || "";
