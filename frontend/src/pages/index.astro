@@ -5,47 +5,87 @@ import DiscountRangeSlider from '../components/DiscountRangeSlider.astro';
 import SearchInput from '../components/SearchInput.astro';
 import GameList from '../components/GameList.astro';
 import json from '../data/steam-deals.json'
-
 ---
 <Layout title='Welcome to Astro.'/>
 
-<main>
+<main id="mainDiv">
 	<div class="flex justify-between space-x-2">
 		<DiscountRangeSlider min={0} max={100}/>
 		<SearchInput/>
 	</div>
-
+	
 	<GameList games={json}/>
-
 </main>
 
-<script type="module">
-	let slider = document.querySelector("#discount-slider") // Ophalen van de slider zelf
-	let sliderTekst = document.querySelector("#sliderValue") 
-	
-	let searchButton = document.querySelector("#searchButton") 
-	let searchInput = document.querySelector("#simple-search") 
+<script>
+	let slider = document.querySelector("#discount-slider")
+	let sliderValue = 0
+	let items = document.querySelectorAll("#item")
+	let searchBar = document.querySelector("#simple-search")
+	let searchButton = document.querySelector("#searchButton")
 
-	
-
-	slider?.addEventListener("input", (event) => {
+    // Filter voor slider
+	function sliderValueFilter(event: any) {
 		let inputValue = event.target
-		let sliderValue = 0; // Value van de slider initialiseren
-		sliderValue = parseInt(inputValue.value) // sliderValue instellen op het inputValue
-		// console.log(sliderValue)
-		
-		sliderTekst.textContent = "Current value: " + sliderValue + "%" // <p> element opvullen met de value van de slider.	
-		
-		const filtered = games.filter(g => g.discountPercentage != null && g.discountPercentage >= sliderValue)
-	
-		console.log(filtered)
-	}) // event toevoegen aan de slider, die elke 'slide' bijhoudt.
+		let tekstSlider = document.querySelector("#sliderValue")?.textContent 
+        sliderValue = parseInt(inputValue.value) // sliderValue instellen op het inputValue
+        tekstSlider = "Current value: " + sliderValue + "%" // <p> element opvullen met de value van de slider.	
+        
+		items.forEach(i => {
+			let discountText = i?.querySelector("p")?.textContent || "";
+			// let discountPercentage = parseInt(discountText.match(/(\d+)%/)?.[1]); // Extract percentage from the text
+			
+			/* Percentage uit tekst halen om ermee te kunnen rekenen. Kan op deze manier en via de bovenstaande syntax, maar dan zijn er null errors */
+			let discountPercentage = NaN; 
+			const match = discountText.match(/(\d+)%/);
+			if (match && match[1]) {
+				discountPercentage = parseInt(match[1]);
+			}
 
-	searchInput.addEventListener("input", () => {
-		console.log(searchInput.value)
-	})
+			if (!isNaN(discountPercentage) && discountPercentage >= sliderValue) {
+				i.classList.remove("hidden"); // Het item / de item(s) tonen op het scherm
+			} else if (sliderValue === 0) {
+				i.classList.remove("hidden"); // als de value null is, alle games laten zien
+			} else {
+				i.classList.add("hidden"); // Op basis van de waarde, het item laten verdwijnen
+			}
+		})
+	}
 
-	searchButton.addEventListener("click", () => {
-		console.log(searchInput.value)
-	})
+	// Functie voor het zoeken van games op basis van hun tit
+	const searchBarFilter = (event: any) => {
+		let searchBarInput = event.target.value
+		
+		items.forEach(item => {
+			let title = item.querySelector("b")?.textContent // Hier wordt er gezocht op de <b> tag omdat in de GameList component, de title tussen zo'n tag staat
+			// console.log(title)
+			if (title?.toLowerCase()?.includes(searchBarInput.toLowerCase()))
+				item.classList.remove("hidden") // Als de title gelijk is aan de searchBarInput, dan zullen de items tonen
+			else if (searchBarInput == "")
+				item.classList.remove("hidden") // Indien de waarde null is, zal deze alle games tonen
+			else 
+				item.classList.add("hidden") // Op basis van wat de value is, alle andere items laten verdwijnen
+		})
+	}
+
+	/* // Functie voor het klikken op de searchknop (niet perse nodig, maar staat hier toch)
+	const searchButtonClick = (event: any) => {
+		let searchBarInput = event.target.value
+		
+		items.forEach(item => {
+			let title = item.querySelector("b")?.textContent // Hier wordt er gezocht op de <b> tag omdat in de GameList component, de title tussen zo'n tag staat
+			// console.log(title)
+			if (title?.toLowerCase()?.includes(searchBarInput.toLowerCase()))
+				item.classList.remove("hidden") // Als de title gelijk is aan de searchBarInput, dan zullen de items tonen
+			else if (searchBarInput == "")
+				item.classList.remove("hidden") // Indien de waarde null is, zal deze alle games tonen
+			else 
+				item.classList.add("hidden") // Op basis van wat de value is, alle andere items laten verdwijnen
+		})
+	} */
+
+	/* Events toevoegen */
+	slider?.addEventListener("input", sliderValueFilter) // 1. event toevoegen aan de slider, die elke 'slide' bijhoudt.
+	searchBar?.addEventListener("input", searchBarFilter) // 2. Functie aan de zoekbalk toevoegen die, per 'karakter' dat invoerd wordt, zal de bijhorende games zal tonen
+	/* searchButton?.addEventListener("click", searchButtonClick) // 3. Functie aan de zoekknop naast de zoekbalk toevoegen die hetzelfde doet als de zoekbalk */
 </script>
