@@ -4,18 +4,41 @@ defaults:
     working-directory: frontend
 on:
   push:
-    branches: [ main ]
+    branches: [ main, master ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, master ]
 jobs:
   build-and-test:
     timeout-minutes: 60
-    name: "Build & Test"
+    name: "frontend"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
+
     - name: Install dependencies
       run: npm install -g pnpm && pnpm install
+
+    - name: Install playwright
+      run: npm init playwright@latest
+
+    - name: Build frontend
+      run: astro build
+
+    - name: Upload frontend artifact
+      uses: actions/upload-artifact
+      with: 
+        name: frontend-artifact
+        path: dist
+      
+    - name: Run Playwright Tests
+      run: npx playwright test index.spec.ts
+      
+    - name: Upload playwright reports
+      uses: actions/upload-artifact
+      with: 
+        name: playwright-test_report
+        path: frontend/playwright-report
+      

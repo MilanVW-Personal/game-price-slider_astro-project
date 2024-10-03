@@ -21,7 +21,7 @@ async function scrapeSteamDeals() {
     //   await page.evaluate('window.scrollTo(0, document.body.scrollHeight)');
     //   await page.waitForTimeout(1000);
     // }
-
+    
     const games = await page.$$eval('.search_result_row', (rows) => {
         return rows.map((row) => ({
             title: row.querySelector('.title').textContent.trim(),
