@@ -16,5 +16,9 @@
     "flowbite": "^2.5.1",
     "tailwindcss": "^3.4.13",
     "typescript": "^5.6.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.47.2",
+    "@types/node": "^22.7.4"
   }
 }

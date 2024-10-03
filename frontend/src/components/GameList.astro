@@ -7,7 +7,7 @@ interface Props {
 
 const {games} = Astro.props
 ---
-<ul class="w-full mt-8 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+<ul class="w-full mt-8 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white" id="listOfGames">
     <!--Deze onderstaande map functie is om de games in een lijst te tonen op de pagina via de component 'Card'. Dit staat in de <main> element, maar wel buiten de <Label> tag.
         Deze laatste moet een short-closed tag worden '</>', omdat, alles wat er dan zou instaan, niet zou tonen op het scherm.-->
     {
