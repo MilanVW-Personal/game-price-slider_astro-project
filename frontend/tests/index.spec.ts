@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 /* Testen of er werkelijk minstens 2 items in de lijst zitten van games of de index.astro pagina */
 test("There are atleast 2 games in the list", async ({ page }) => {
-    await page.goto("/");  
+    await page.goto("/astro-build");  
    
     const lijstVanGames = /*await*/ page.locator("#listOfGames li") // lijst ophalen met <li>
     const aantal = await lijstVanGames.count() // Het aantal items in de lijst ophalen
@@ -11,7 +11,7 @@ test("There are atleast 2 games in the list", async ({ page }) => {
 
 /* Testen of er x games in de lijst staan wanneer je filtert op 'Forza' */
 test("The search term 'Forza', gives back x items when put in the searchbar", async ({ page }) => {
-    await page.goto("/");  
+    await page.goto("/astro-build");  
     
     const lijstVanGames = /*await*/ page.locator("#listOfGames li")
     const aantal = await lijstVanGames.count()
@@ -27,7 +27,7 @@ test("The search term 'Forza', gives back x items when put in the searchbar", as
 
 /* Testen of er een input-veld met id 'simple-search' aanwezig is */
 test("On the index page, a searchbar exists", async ({ page }) => {
-    await page.goto("/");;
+    await page.goto("/astro-build");;
    
     // Zoekbalk ophalen
     const zoekbalk = /*await*/ page.locator("#simple-search")
@@ -36,7 +36,7 @@ test("On the index page, a searchbar exists", async ({ page }) => {
 
 /* Testen of de juiste games tonen bij het filteren van de slider en zoekbalk tegelijk */
 test("While filtering using the searchbar and slider, x games show on screen", async ({ page }) => {
-    await page.goto("/")
+    await page.goto("/astro-build")
 
     // Zoekveld invullen met 'Forza'
     const zoekbalkMetWaarde = /*await*/ page.locator("#simple-search")
