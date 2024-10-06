@@ -41,9 +41,9 @@ jobs:
         with: 
           name: playwright-test_report
           path: frontend/playwright-report
-  # volgende keer (morgen / zaterdag, de deploy nog proberen afmaken)
-  
+
   deploy:
+    needs: build-and-test
     name: 🎉 Deploy
     runs-on: ubuntu-latest
     steps:
