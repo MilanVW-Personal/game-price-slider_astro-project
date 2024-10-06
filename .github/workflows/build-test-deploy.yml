@@ -31,7 +31,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with: 
           name: frontend-artifact
-          path: dist/
+          path: frontend/dist/
         
       - name: Run Playwright Tests
         run: npx playwright test index.spec.ts
@@ -43,7 +43,7 @@ jobs:
           path: frontend/playwright-report
 
   deploy:
-    # needs: build-and-test # Deze 'needs' zal ervoor zorgen dat de deploy enkel wordt uitgevoerd als de 'build-and-test' job succesvol is.
+    needs: build-and-test # Deze 'needs' zal ervoor zorgen dat de deploy enkel wordt uitgevoerd als de 'build-and-test' job succesvol is.
     name: 🚀 Deploy Website Every Commit
     runs-on: ubuntu-latest
     steps:
@@ -54,7 +54,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: frontend-artifact
-        path: dist/
+        path: 'build'
     
     - name:  📂 Sync Files (bestanden synchroniseren met server)
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -62,5 +62,5 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: 'dist/' 
-        server-dir: '/www/frontend/'
+        local-dir: 'build/' 
+        server-dir: 'www/frontend/'
