@@ -37,7 +37,7 @@ jobs:
       run: npx playwright test index.spec.ts
       
     - name: Upload playwright reports
-      uses: actions/upload-artifact
+      uses: actions/upload-artifact@v3
       with: 
         name: playwright-test_report
         path: frontend/playwright-report
