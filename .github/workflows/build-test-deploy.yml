@@ -27,14 +27,8 @@ jobs:
       - name: Build frontend
         run: npx astro check && npx astro build
 
-      - name: Debug - List all directories
-        run: ls -la
-
-      - name: Debug - List contents of the dist directory
-        run: ls -la ./dist
-
       - name: Upload frontend artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact
         with: 
           name: frontend-artifact
           path: ./dist
@@ -43,7 +37,7 @@ jobs:
         run: npx playwright test index.spec.ts
         
       - name: Upload playwright reports
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact
         with: 
           name: playwright-test_report
           path: frontend/playwright-report
@@ -54,7 +48,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout
     
     - name: Bestanden synchroniseren met server
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
