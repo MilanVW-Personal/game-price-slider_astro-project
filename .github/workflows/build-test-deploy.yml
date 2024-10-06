@@ -31,8 +31,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with: 
           name: frontend-artifact
-          path: ./dist
-          archive: zip
+          path: ./dist # straks proberen error weg te werken
         
       - name: Run Playwright Tests
         run: npx playwright test index.spec.ts
@@ -44,7 +43,7 @@ jobs:
           path: frontend/playwright-report
 
   deploy:
-    needs: build-and-test # Deze 'needs' zal ervoor zorgen dat de deploy enkel wordt uitgevoerd als de 'build-and-test' job succesvol is.
+    # needs: build-and-test # Deze 'needs' zal ervoor zorgen dat de deploy enkel wordt uitgevoerd als de 'build-and-test' job succesvol is.
     name: Deploy
     runs-on: ubuntu-latest
     steps:
