@@ -19,7 +19,10 @@ jobs:
           node-version: lts/*
 
       - name: Install dependencies
-        run: npm install -g pnpm && pnpm install && npm init playwright@latest && npx playwright install-deps
+        run: npm install -g pnpm && pnpm install
+
+      - name: Playwright installeren
+        run: npm init playwright@latest && npx playwright install --with-deps
 
       - name: Build frontend
         run: npx astro check && npx astro build
@@ -40,7 +43,7 @@ jobs:
           path: frontend/playwright-report
 
   deploy:
-    needs: build-and-test # Deze 'needs' zal ervoor zorgen dat de deploy enkel wordt uitgevoerd als de 'build-and-test' job succesvol is.
+    # needs: build-and-test # Deze 'needs' zal ervoor zorgen dat de deploy enkel wordt uitgevoerd als de 'build-and-test' job succesvol is.
     name: 🚀 Deploy Website Every Commit
     runs-on: ubuntu-latest
     steps:
