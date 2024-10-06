@@ -27,6 +27,12 @@ jobs:
       - name: Build frontend
         run: npx astro check && npx astro build
 
+      - name: Debug - List all directories
+        run: ls -la
+
+      - name: Debug - List contents of the dist directory
+        run: ls -la ./dist
+
       - name: Upload frontend artifact
         uses: actions/upload-artifact@v3
         with: 
