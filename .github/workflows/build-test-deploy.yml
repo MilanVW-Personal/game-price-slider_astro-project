@@ -34,7 +34,7 @@ jobs:
           path: ./dist # straks proberen error weg te werken
         
       - name: Run Playwright Tests
-        run: npx playwright test index.spec.ts
+        run:  npm run preview && npx playwright test index.spec.ts
         
       - name: Upload playwright reports
         uses: actions/upload-artifact@v4
