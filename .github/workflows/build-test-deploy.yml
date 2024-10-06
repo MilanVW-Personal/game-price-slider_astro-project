@@ -31,7 +31,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with: 
           name: frontend-artifact
-          path: /dist
+          path: ./dist
+          archive: zip
         
       - name: Run Playwright Tests
         run: npx playwright test index.spec.ts
