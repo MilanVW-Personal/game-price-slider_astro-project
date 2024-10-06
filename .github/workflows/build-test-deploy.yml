@@ -19,7 +19,7 @@ jobs:
           node-version: lts/*
 
       - name: Install dependencies
-        run: npm install -g pnpm && pnpm install && npx playwright install-deps
+        run: npm install -g pnpm && pnpm install && && npx playwright install && npx playwright install-deps
 
       - name: Install playwright
         run: npm init playwright@latest
@@ -31,7 +31,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with: 
           name: frontend-artifact
-          path: ./dist # straks proberen error weg te werken
+          path: frontend/dist/ # straks proberen error weg te werken
         
       - name: Run Playwright Tests
         run: npx playwright test index.spec.ts
@@ -43,14 +43,20 @@ jobs:
           path: frontend/playwright-report
 
   deploy:
-    # # needs: build-and-test # Deze 'needs' zal ervoor zorgen dat de deploy enkel wordt uitgevoerd als de 'build-and-test' job succesvol is.
-    name: Deploy
+    needs: build-and-test # Deze 'needs' zal ervoor zorgen dat de deploy enkel wordt uitgevoerd als de 'build-and-test' job succesvol is.
+    name: 🚀 Deploy Website Every Commit
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
+    - name: 🚚 Get Latest Code (Checkout)
       uses: actions/checkout@v4
+
+    - name: Download Artifact van Playwright
+      uses: actions/download-artifact@v4
+      with:
+        name: frontend-build
+        path: ./playwright-report/
     
-    - name: Bestanden synchroniseren met server
+    - name:  📂 Sync Files (bestanden synchroniseren met server)
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: ${{ secrets.FTP_SERVER }}
