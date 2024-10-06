@@ -19,10 +19,7 @@ jobs:
           node-version: lts/*
 
       - name: Install dependencies
-        run: npm install -g pnpm && pnpm install && npx playwright install && npx playwright install-deps
-
-      - name: Install playwright
-        run: npm init playwright@latest
+        run: npm install -g pnpm && pnpm install && npm init playwright@latest && npx playwright install-deps
 
       - name: Build frontend
         run: npx astro check && npx astro build
