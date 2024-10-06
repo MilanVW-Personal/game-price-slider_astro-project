@@ -31,7 +31,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with: 
           name: frontend-artifact
-          path: frontend/dist/ # straks proberen error weg te werken
+          path: frontend/dist/
         
       - name: Run Playwright Tests
         run: npx playwright test index.spec.ts
@@ -50,11 +50,11 @@ jobs:
     - name: 🚚 Get Latest Code (Checkout)
       uses: actions/checkout@v4
 
-    - name: Download Artifact van Playwright
+    - name: Download frontend artifact
       uses: actions/download-artifact@v4
       with:
         name: frontend-artifact
-        path: ./playwright-report/
+        path: frontend/dist/
     
     - name:  📂 Sync Files (bestanden synchroniseren met server)
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
