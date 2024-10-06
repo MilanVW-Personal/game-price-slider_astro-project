@@ -25,7 +25,7 @@ jobs:
         run: npm init playwright@latest
 
       - name: Build frontend
-        run: astro build
+        run: astro check && astro build
 
       - name: Upload frontend artifact
         uses: actions/upload-artifact@v3
@@ -43,14 +43,14 @@ jobs:
           path: frontend/playwright-report
 
   deploy:
-    needs: build-and-test
-    name: 🎉 Deploy
+    needs: build-and-test # Deze 'needs' zal ervoor zorgen dat de deploy enkel wordt uitgevoerd als de 'build-and-test' job succesvol is.
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
-    - name: 🚚 Get latest code
+    - name: Checkout
       uses: actions/checkout@v4
     
-    - name: 📂 Sync files
+    - name: Bestanden synchroniseren met server
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: ${{ secrets.FTP_SERVER }}
