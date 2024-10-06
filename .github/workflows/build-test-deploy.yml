@@ -42,27 +42,28 @@ jobs:
         name: playwright-test_report
         path: frontend/playwright-report
   # volgende keer (morgen / zaterdag, de deploy nog proberen afmaken)
-  deploy:
-    on: push
-    name: Deploy website on push
-    jobs:
-      web-deploy:
-        name: Deploy
-        runs-on: ubuntu-latest
-        steps:
-        - name: Checkout
-          uses: actions/checkout@v4
-        
-        - name: Download frontend artifact
-          uses: actions/download-artifact@v3
-          with:
-            name: frontend-artifact
-        
-        - name: Sync files
-          uses: SamKirkland/FTP-Deploy-Action@4.3.0
-          with:
-            server: ${{ secrets.FTP_SERVER }}
-            username: ${{ secrets.FTP_USERNAME }}
-            password: ${{ secrets.FTP_PASSWORD }}
-            local-dir: './frontend/'
-            server-dir: '/www/frontend/'
+  
+deploy:
+  on: push
+  name: Deploy website on push
+  jobs:
+    web-deploy:
+      name: Deploy
+      runs-on: ubuntu-latest
+      steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Download frontend artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: frontend-artifact
+      
+      - name: Sync files
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: './frontend/'
+          server-dir: '/www/frontend/'
