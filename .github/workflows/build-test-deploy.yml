@@ -43,7 +43,7 @@ jobs:
           path: frontend/playwright-report
 
   deploy:
-    # needs: build-and-test # Deze 'needs' zal ervoor zorgen dat de deploy enkel wordt uitgevoerd als de 'build-and-test' job succesvol is.
+    # # needs: build-and-test # Deze 'needs' zal ervoor zorgen dat de deploy enkel wordt uitgevoerd als de 'build-and-test' job succesvol is.
     name: Deploy
     runs-on: ubuntu-latest
     steps:
