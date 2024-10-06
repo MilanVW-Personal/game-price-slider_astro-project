@@ -25,7 +25,7 @@ jobs:
         run: npm init playwright@latest
 
       - name: Build frontend
-        run: astro check && astro build
+        run: npx astro check && npx astro build
 
       - name: Upload frontend artifact
         uses: actions/upload-artifact@v3
