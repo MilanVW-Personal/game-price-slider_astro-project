@@ -22,7 +22,7 @@ jobs:
         run: npm install -g pnpm && pnpm install
 
       - name: Playwright installeren
-        run: npm init playwright@latest && npx playwright install --with-deps
+        run: npm init playwright@latest && npx playwright install --with-deps # PlayWright installeren met de nodige dependencies
 
       - name: Build frontend
         run: npx astro check && npx astro build
@@ -31,16 +31,16 @@ jobs:
         uses: actions/upload-artifact@v4
         with: 
           name: frontend-artifact
-          path: frontend/dist/
+          path: frontend/dist/ # Artifact uploaden naar 'dist' map
         
       - name: Run Playwright Tests
-        run: npx playwright test index.spec.ts
+        run: npx playwright test index.spec.ts # Testen PLaywright uitvoeren
         
       - name: Upload playwright reports
         uses: actions/upload-artifact@v4
         with: 
           name: playwright-test_report
-          path: frontend/playwright-report
+          path: frontend/playwright-report # Rapport van playwright test uploaden
 
   deploy:
     needs: build-and-test # Deze 'needs' zal ervoor zorgen dat de deploy enkel wordt uitgevoerd als de 'build-and-test' job succesvol is.
@@ -63,4 +63,4 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: 'build/' 
-        server-dir: 'www/'
+        server-dir: 'www/itc3_astro/' # mappen structuur File-Manager Combell
