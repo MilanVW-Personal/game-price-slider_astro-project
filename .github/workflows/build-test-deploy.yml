@@ -28,7 +28,7 @@ jobs:
       run: astro build
 
     - name: Upload frontend artifact
-      uses: actions/upload-artifact
+      uses: actions/upload-artifact@v3
       with: 
         name: frontend-artifact
         path: dist
