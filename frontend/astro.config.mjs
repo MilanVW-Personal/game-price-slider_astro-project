@@ -6,6 +6,6 @@ import tailwind from '@astrojs/tailwind';
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind()],
-  base: '/astro-build',
-  site: 'https://milan-vanwinkel-statweb.be/astro-build'
+  base: '/itc3_astro',
+  site: 'https://milan-vanwinkel-statweb.be/itc3_astro'
 });
