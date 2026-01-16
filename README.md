@@ -3,7 +3,7 @@
 Deze repository bevat alle files voor het Astro project dat ik destijds voor het vak IT-Challenges 3 heb moeten maken. Met deze README wil ik een duidelijker beeld kunnen schetsen over hoe de app juist in elkaar zit en hoe deze precies werkt. Je kan het project live bekijken via [deze link](https://www.milan-vanwinkel-statweb.be/itc3_astro).
 
 ## Wat is dit project?
-Dit project is een webapplicatie, gemaakt met Astro, waarbij er vanuit een JSON bestand een aantal games worden opgehaald en worden getoond. Dankzij functionaliteiten zoals een slider, worden de games gefiltered op basis van hun kortingsprijs. Je kan ook, door de zoekbalk te gebruiken, bepaalde games zoeken in de lijst. Deze verandert bij elke input.
+Dit project is een webapplicatie, gemaakt met Astro, waarbij er vanuit een JSON bestand een aantal games worden opgehaald en worden getoond. Dankzij functionaliteiten zoals een slider, worden de games gefilterd op basis van hun kortingsprijs. Je kan ook, door de zoekbalk te gebruiken, bepaalde games zoeken in de lijst. Deze verandert bij elke input.
 
 ## Waarom heb ik dit project gemaakt?
 Zoals ik al eerder zei, was dit een verplicht project om te maken voor het vak IT-Challenges 3. Dit was de tweede opdracht van het vak, want voor dit project was er ook nog een web-scraper project met Puppeteer.
