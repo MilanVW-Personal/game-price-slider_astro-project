@@ -52,13 +52,13 @@ import json from '../data/steam-deals.json'
 		})
 	}
 
-	// Functie voor het zoeken van games op basis van hun tit
+	// Functie voor het zoeken van games op basis van hun title
 	const searchBarFilter = (event: any) => {
 		let searchBarInput = event.target.value
 		
 		items.forEach(item => {
 			let title = item.querySelector("b")?.textContent // Hier wordt er gezocht op de <b> tag omdat in de GameList component, de title tussen zo'n tag staat
-			// console.log(title)
+
 			if (title?.toLowerCase()?.includes(searchBarInput.toLowerCase()))
 				item.classList.remove("hidden") // Als de title gelijk is aan de searchBarInput, dan zullen de items tonen
 			else if (searchBarInput == "")
@@ -68,13 +68,13 @@ import json from '../data/steam-deals.json'
 		})
 	}
 
-	/* // Functie voor het klikken op de searchknop (niet perse nodig, maar staat hier toch)
+	/* Functie voor het klikken op de searchknop (niet perse nodig, maar staat hier toch)
 	const searchButtonClick = (event: any) => {
 		let searchBarInput = event.target.value
 		
 		items.forEach(item => {
 			let title = item.querySelector("b")?.textContent // Hier wordt er gezocht op de <b> tag omdat in de GameList component, de title tussen zo'n tag staat
-			// console.log(title)
+
 			if (title?.toLowerCase()?.includes(searchBarInput.toLowerCase()))
 				item.classList.remove("hidden") // Als de title gelijk is aan de searchBarInput, dan zullen de items tonen
 			else if (searchBarInput == "")
