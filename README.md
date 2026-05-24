@@ -1,41 +1,41 @@
 # IT-Challenges 3 - Astro Project
-## 📌 Projectoverzicht
-Deze repository bevat de broncode van een Astro-webapplicatie die ik heb ontwikkeld voor het vak IT-Challenges 3.
+## 📌 Project overview
+This repository contains the source code of an Astro web application that I developed for the IT-Challenges 3 course.
 
-De applicatie haalt een lijst met games op uit een JSON-bestand en toont deze in een dynamische interface met filtering- en zoekfunctionaliteit.
+The application retrieves a list of games from a JSON file and displays them in a dynamic interface with filtering and search functionality.
 
 👉 **Live demo:** https://game-price-slider-astro-project.netlify.app
 
-## 🎯 Doel van het project
-Dit project werd ontwikkeld als verplichte opdracht binnen IT-Challenges 3.
+## 🎯 Goal of the project
+This project was developed as a mandatory assignment within IT-Challenges 3.
 
-Het project toont het gebruik van:
-- Astro als frontend framework
-- Dynamische rendering op basis van JSON-data
-- Client-side filtering en zoekfunctionaliteit
-- Interactieve UI-componenten (slider + live search)
+The project demonstrates the use of:
+- Astro as a frontend framework
+- Dynamic rendering based on JSON data
+- Client-side filtering and search functionality
+- Interactive UI components (slider + live search)
 
-## 🧠 Functionaliteiten
-### Game-overzicht
-- Games worden ingeladen vanuit een JSON-dataset
-- Responsive weergave van alle games
+## 🧠 Functionalities
+### Game Overview
+- Games are loaded from a JSON dataset
+- Responsive display of all games
 
-### Kortingsfilter (slider)
-- Filtert games op basis van minimumkorting
-- Toont enkel games met korting ≥ ingestelde waarde
-- Standaardwaarde: 50%
+### Discount Filter (slider)
+- Filters games based on minimum discount
+- Shows only games with a discount ≥ set value
+- Default value: 50%
 
-### Zoekfunctionaliteit
-- Live zoeken in gametitels
-- Werkt onafhankelijk van de sliderfilter
-- Resultaten worden realtime aangepast tijdens het typen
+### Search Functionality
+- Live search in game titles
+- Works independently of the slider filter
+- Results are updated in real-time as you type
 
-## 📆 Ontwikkelingsperiode
-Dit project werd ontwikkeld tussen:
-- **september 2024**
-- **6 oktober 2024**
+## 📆 Development time frame
+This project was developed between:
+- **September 2024**
+- **6 October 2024**
 
-## 🛠️ Technologieën
+## 🛠️ Technologies
 - Astro
 - HTML
 - CSS
@@ -44,25 +44,27 @@ Dit project werd ontwikkeld tussen:
 - Tailwind CSS
 - GitHub Actions
 
-## ⚙️ Lokale installatie
-Dit project kan lokaal worden gestart met Astro via:
+## ⚙️ Local installation
+This project can be started locally with Astro via:
 ```bash
 npm install
 npm run dev
 ```
 
 ## 📸 Screenshots
-### Hoofdpagina
-De hoofdpagina van de applicatie.
-![screenshot-homepagina](./frontend/src/data/homepage-screenshot.png)
+### Homepage
+The homepage of the application.
+![screenshot-homepage](./frontend/src/data/homepage-screenshot.png)
 
-### Kortingsfilter (slider)
-Games worden gefilterd op basis van het ingestelde kortingspercentage.
+### Discount filter (slider)
+Games are filtered based on the set discount percentage.
 ![screenshot-filter](./frontend/src/data/filtered-screenshot.png)
 
-### Zoekfunctionaliteit
-Live zoekfunctie die games filtert op basis van ingevoerde tekst.
-![screenshot-zoekwaarde](./frontend/src/data/zoekwaarde-screenshot.png)
+### Search functionality
+Live search function that filters games based on entered text.
+![screenshot-search-value](./frontend/src/data/search-value-screenshot.png)
 
-## 🌐 English version
-English-speaking visitors can read the translated version of this README via [`README_EN`](README_EN.md).
+## 🌐 Languages
+### Current versions
+- English (current)
+- Dutch: [`README_NL.md`](README_NL.md)
