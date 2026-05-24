@@ -65,6 +65,5 @@ Live search function that filters games based on entered text.
 ![screenshot-search-value](./frontend/src/data/search-value-screenshot.png)
 
 ## 🌐 Languages
-### Current versions
 - English (current)
 - Dutch: [`README_NL.md`](README_NL.md)

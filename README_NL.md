@@ -65,6 +65,5 @@ Live zoekfunctie die games filtert op basis van ingevoerde tekst.
 ![screenshot-zoekwaarde](./frontend/src/data/zoekwaarde-screenshot.png)
 
 ## 🌐 Talen
-### Huidige versies
 - Nederlands (huidige)
 - Engels: [`README.md`](README.md)
